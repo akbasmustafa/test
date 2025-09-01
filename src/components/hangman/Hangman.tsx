@@ -57,9 +57,20 @@ const Hangman = () => {
   return (
     <div>
       <h1>Hangman</h1>
-      <h2 data-testid='guess' className='guess'>
+      <h2
+        data-testid='guess'
+        className='guess'
+        role='group'
+        aria-label='Current guessed letters'
+      >
         {guess.map((letter, index) => (
-          <span key={index}>{letter}</span>
+          <span
+            key={index}
+            className='letter'
+            aria-label={letter === '_' ? 'blank' : letter}
+          >
+            {letter}
+          </span>
         ))}
       </h2>
       <h3 className='lives' aria-live='polite'>
@@ -83,9 +94,7 @@ const Hangman = () => {
       {(lives === 0 || !guess.includes('_')) && (
         <div className='game-over' aria-live='assertive'>
           {lives === 0 ? (
-            <h2 className='end-message'>
-              You lost! The word was: {answer}
-            </h2>
+            <h2 className='end-message'>You lost! The word was: {answer}</h2>
           ) : (
             <h2 className='end-message'>
               Congratulations! You guessed the word!
